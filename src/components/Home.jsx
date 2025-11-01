@@ -1,5 +1,10 @@
-export default function Home(props){
-    return <div>
-        <h1>Home</h1>
-    </div>
+import NavBar from './NavBar'
+
+export default function Home() {
+    return (
+        <div >
+            <NavBar />
+            <h1 style={{ marginTop: "80px", textAlign: "center" }}>Home</h1>
+        </div>
+    );
 }

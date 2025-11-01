@@ -4,11 +4,11 @@ import viteLogo from '/vite.svg'
 import './App.css'
 import { Route, HashRouter, Routes } from 'react-router'
 import Home from './components/Home'
+import NavBar from './components/NavBar'
 
 function App() {
-  const [count, setCount] = useState(0)
 
-  return <HashRouter>
+  return <HashRouter >
     <Routes>
       <Route path = "/" element ={<Home/>}></Route>
     </Routes>

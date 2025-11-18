@@ -54,25 +54,8 @@ export default function NavBar() {
                         >
                             <Nav.Link as={Link} to="/" style={{ color: "white", fontFamily: "'Orbitron', sans-serif" }}>Home</Nav.Link>
                             <Nav.Link as={Link} to="/scoringBuilder" style={{ color: "white", fontFamily: "'Orbitron', sans-serif" }}>Scoring Builder</Nav.Link>
-                            <NavDropdown title="Link" id="navbarScrollingDropdown" style={{ color: "white", fontFamily: "'Orbitron', sans-serif" }}>
-                                <NavDropdown.Item href="#action3">Action</NavDropdown.Item>
-                                <NavDropdown.Item href="#action4">Another action</NavDropdown.Item>
-                                <NavDropdown.Divider />
-                                <NavDropdown.Item href="#action5">Something else here</NavDropdown.Item>
-                            </NavDropdown>
-                            <Nav.Link href="#" disabled style={{ color: "white", fontFamily: "'Orbitron', sans-serif" }}>
-                                Link
-                            </Nav.Link>
+                            <Nav.Link as={Link} to="/addDriver" style={{ color: "white", fontFamily: "'Orbitron', sans-serif" }}>Add Drivers</Nav.Link>
                         </Nav>
-                        <Form className="d-flex">
-                            <Form.Control
-                                type="search"
-                                placeholder="Search"
-                                className="me-2"
-                                aria-label="Search"
-                            />
-                            <Button variant="light">Search</Button>
-                        </Form>
                     </Navbar.Collapse>
                 </Navbar>
 

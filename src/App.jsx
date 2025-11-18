@@ -6,6 +6,7 @@ import { Route, HashRouter, Routes } from "react-router-dom";
 import Home from './components/Home'
 import NavBar from './components/NavBar'
 import ScoringBuilder from './components/ScoringBuilder'
+import AddDriver from './components/AddDriver'
 import MyContext from "./components/contexts/MyContext";
 
 function App() {
@@ -29,6 +30,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/scoringBuilder" element={<ScoringBuilder />} />
+          <Route path="/addDriver" element={<AddDriver />} />
         </Routes>
       </HashRouter>
     </MyContext.Provider>

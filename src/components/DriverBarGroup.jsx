@@ -10,7 +10,8 @@ const DriverBarGroup = () => {
         drivers, setDrivers,
         driverInfo, setDriverInfo,
         error, setError,
-        setIsLoading
+        setIsLoading,
+        isLoading
     } = useContext(MyContext);
 
     async function fetchResults() {
@@ -133,7 +134,7 @@ const DriverBarGroup = () => {
     const maxPoints = Math.max(...scores.values());
     return (
         <div style={{ padding: 20, color: "white" }}>
-            <h2>Driver Standings (2024)</h2>
+            {!isLoading ? <div>Driver Standings (2024)</div> : <div>Results Loading...</div>}
 
             {[...scores.entries()]
                 .sort((a, b) => b[1] - a[1])

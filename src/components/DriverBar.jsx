@@ -8,27 +8,30 @@ const DriverBar = ({ name, driverNum, totalPoints, color, maxPoints }) => {
     useEffect(() => {
         const timeout = setTimeout(() => {
             setWidth(widthPercent);
-        }, 100); 
+        }, 100);
         return () => clearTimeout(timeout);
     }, [widthPercent]);
 
     return (
         <div style={{ marginBottom: 10 }}>
             <div style={{ marginBottom: 4, color: "white", fontWeight: "bold" }}>
-                {name} {' '}
-                <span style={{ color, fontSize: "30" }}>{driverNum}</span>
-                 - {totalPoints} pts
+                {name} - <span style={{ color }}>{driverNum}</span>{' '} pts
             </div>
 
-            <div
-                style={{
-                    height: "24px",
-                    width: `${width}%`,
-                    backgroundColor: color,
-                    borderRadius: 3,
-                    transition: "width 1s ease-out",
-                }}
-            />
+            <div style={{ display: "flex", alignItems: "center" }}>
+                <span style={{ color, marginRight: 8, minWidth: 30, textAlign: "right" }}>
+                    {totalPoints}
+                </span>
+                <div
+                    style={{
+                        height: "24px",
+                        width: `${width}%`,
+                        backgroundColor: color,
+                        borderRadius: 3,
+                        transition: "width 1s ease-out",
+                    }}
+                />
+            </div>
         </div>
     );
 };

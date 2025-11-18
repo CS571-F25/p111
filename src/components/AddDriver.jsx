@@ -2,7 +2,7 @@ import NavBar from './NavBar'
 import React, { useEffect, useState, useContext } from 'react';
 import MyContext from "./contexts/MyContext";
 
-export default function ScoringBuilder() {
+export default function AddDriver() {
     const {
         results, setResults,
         drivers, setDrivers,
@@ -11,12 +11,11 @@ export default function ScoringBuilder() {
         setIsLoading
     } = useContext(MyContext);
 
-    console.log("AAAA", Array.from(driverInfo.entries()));
     return (
         <div style={{ marginTop: "100px", textAlign: "center" }}>
             <NavBar />
-            <div style={{color:"white"}}>Scoring Builder</div>
-            <div style={{color:"white"}}>Here the user will be able to create a scoring system by mapping point amounts to positions</div>
+            <div style={{color:"white"}}>Add Driver</div>
+            <div style={{color:"white"}}>Here the use will be able to add a custom driver with a custom number of points</div>
 
         </div>
     );

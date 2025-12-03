@@ -1,5 +1,6 @@
-export function calculateF1StandardScores(driverMap) {
-    const pointsForPosition = [25, 18, 15, 12, 10, 8, 6, 4, 2, 1];
+export function calculateStandardScores(driverMap, pointMap) {
+    //const pointsForPosition = [25, 18, 15, 12, 10, 8, 6, 4, 2, 1];
+    console.log(pointMap);
     const pointsForPositionSprint = [8, 7, 6, 5, 4, 3, 2, 1];
     const scores = new Map();
 
@@ -17,8 +18,8 @@ export function calculateF1StandardScores(driverMap) {
                 if (position <= pointsForPositionSprint.length)
                     total += pointsForPositionSprint[position - 1];
             } else {
-                if (position <= pointsForPosition.length)
-                    total += pointsForPosition[position - 1];
+                if (position <= pointMap.length)
+                    total += pointMap[position - 1];
             }
         });
 

@@ -1,8 +1,9 @@
 // DriverBarGroup.jsx
 import React, { useEffect, useState, useContext } from 'react';
-import { calculateF1StandardScores } from "../scoringSystems/f1Scoring";
+import { calculateStandardScores } from "../scoringSystems/f1Scoring";
 import MyContext from "./contexts/MyContext";
 import DriverBar from './DriverBar';
+import Dropdown from 'react-bootstrap/Dropdown';
 
 const DriverBarGroup = () => {
     const {
@@ -11,12 +12,15 @@ const DriverBarGroup = () => {
         driverInfo, setDriverInfo,
         error, setError,
         setIsLoading,
-        isLoading
+        isLoading,
+        year, setYear,
+        system, setSystem,
+        customSystem, setCustomSystem
     } = useContext(MyContext);
 
     async function fetchResults() {
         try {
-            const resp = await fetch('https://api.openf1.org/v1/sessions?year=2025&session_name=Race&session_name=Sprint');
+            const resp = await fetch(`https://api.openf1.org/v1/sessions?year=${year}&session_name=Race&session_name=Sprint`);
             if (!resp.ok) {
                 throw new Error(`HTTP error! status: ${resp.status}`);
             }
@@ -49,7 +53,16 @@ const DriverBarGroup = () => {
         if (results.length > 0 || driverInfo.size > 0) return;
         setIsLoading(true);
         fetchResults();
+
     }, []);
+
+    useEffect(() => {
+        setIsLoading(true);
+        setResults([]);
+        setDrivers(new Map());
+        setDriverInfo(new Map());
+        fetchResults();
+    }, [year, system]);
 
     useEffect(() => {
 
@@ -130,11 +143,52 @@ const DriverBarGroup = () => {
 
     if (error) return <div>Error: {error}</div>;
 
-    const scores = calculateF1StandardScores(drivers);
+    let scores = [];
+    if(system === "F1"){
+        scores = calculateStandardScores(drivers, [25, 18, 15, 12, 10, 8, 6, 4, 2, 1]);
+    }else if(system === "Nascar"){
+         scores = calculateStandardScores(drivers, [40,35,34,33,32,31,29,28,27,26,25,24,23,22,21,20,19,18,17,16,15,14,13,12,11,10,9,8,7,6,5,4,3,2,1,1,1,1,1]);
+    }else if(system === "MarioKart"){
+         scores = calculateStandardScores(drivers, [15, 12, 10, 9, 9, 8, 8, 7, 7, 6, 6, 5, 5, 5, 4, 4, 4, 3, 3, 3, 2, 2, 1]);
+    }else if(system === "Custom"){
+         scores = calculateStandardScores(drivers, customSystem);
+    }
     const maxPoints = Math.max(...scores.values());
     return (
         <div style={{ padding: 20, color: "white" }}>
-            {!isLoading ? <div>Driver Standings (2024)</div> : <div>Results Loading...</div>}
+            <div style={{
+                padding: 20,
+                color: "white",
+                display: "flex",
+                justifyContent: "center",
+                gap: "1rem"
+            }}>
+                <div>Year</div>
+                <Dropdown>
+                    <Dropdown.Toggle variant="success">
+                        {year}
+                    </Dropdown.Toggle>
+                    <Dropdown.Menu>
+                        <Dropdown.Item onClick={() => setYear(2025)}>2025</Dropdown.Item>
+                        <Dropdown.Item onClick={() => setYear(2024)}>2024</Dropdown.Item>
+                        <Dropdown.Item onClick={() => setYear(2023)}>2023</Dropdown.Item>
+                    </Dropdown.Menu>
+                </Dropdown>
+                <div>Scoring System</div>
+                <Dropdown>
+                    <Dropdown.Toggle variant="success">
+                        {system}
+                    </Dropdown.Toggle>
+                    <Dropdown.Menu>
+                        <Dropdown.Item onClick={() => setSystem("F1")}>F1 (No fastest lap point)</Dropdown.Item>
+                        <Dropdown.Item onClick={() => setSystem("Nascar")}>Nascar</Dropdown.Item>
+                        <Dropdown.Item onClick={() => setSystem("MarioKart")}>Mario Kart</Dropdown.Item>
+                        <Dropdown.Item onClick={() => setSystem("Custom")}>Custom System</Dropdown.Item>
+                    </Dropdown.Menu>
+                </Dropdown>
+            </div>
+
+            {!isLoading ? <div style={{ padding: 20 }} >Driver Standings ({year})</div> : <div style={{ padding: 20 }}>Results Loading...</div>}
 
             {[...scores.entries()]
                 .sort((a, b) => b[1] - a[1])

@@ -1,5 +1,6 @@
 import NavBar from './NavBar'
 import React, { useEffect, useState, useContext } from 'react';
+import { Form, Button, Row, Col } from "react-bootstrap";
 import MyContext from "./contexts/MyContext";
 
 export default function ScoringBuilder() {
@@ -8,16 +9,38 @@ export default function ScoringBuilder() {
         drivers, setDrivers,
         driverInfo, setDriverInfo,
         error, setError,
-        setIsLoading
+        setIsLoading,
+        customSystem, setCustomSystem
     } = useContext(MyContext);
 
-    console.log("AAAA", Array.from(driverInfo.entries()));
-    return (
-        <div style={{ marginTop: "100px", textAlign: "center" }}>
-            <NavBar />
-            <div style={{color:"white"}}>Scoring Builder</div>
-            <div style={{color:"white"}}>Here the user will be able to create a scoring system by mapping point amounts to positions</div>
+    const handleChange = (index, newValue) => {
+        const updated = [...customSystem];
+        updated[index] = parseInt(newValue);
+        setCustomSystem(updated);
+    };
 
+    return (
+        <div style={{ padding: 20, color: "white" }}>
+            <NavBar/>
+            <h1 style={{padding: 20}}>Enter Points per Position</h1>
+            <h2 style={{padding: 20}}>Select "Custom Score" in Home to view your system</h2>
+
+            <Form>
+                <Row className="g-3">
+                    {customSystem.map((val, i) => (
+                        <Col xs={2} md={1} key={i}>
+                            <h2>{i + 1}</h2>
+                            <Form.Control
+                                type="text"
+                                value={val}
+                                placeholder={`Input ${i + 1}`}
+                                onChange={(e) => handleChange(i, e.target.value)}
+                            />
+                        </Col>
+                    ))}
+                </Row>
+
+            </Form>
         </div>
     );
 }

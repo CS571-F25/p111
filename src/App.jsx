@@ -16,6 +16,9 @@ function App() {
   const [driverInfo, setDriverInfo] = useState(new Map());
   const [error, setError] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
+  const [year, setYear] = useState("2025");
+  const [system, setSystem] = useState("F1");
+  const [customSystem, setCustomSystem] = useState([25, 18, 15, 12, 10, 8, 6, 4, 2, 1,0,0,0,0,0,0,0,0,0,0]);
 
 
   return (
@@ -24,7 +27,10 @@ function App() {
       drivers, setDrivers,
       driverInfo, setDriverInfo,
       error, setError,
-      isLoading, setIsLoading
+      isLoading, setIsLoading,
+      year, setYear,
+      system, setSystem,
+      customSystem, setCustomSystem
     }}>
       <HashRouter>
         <Routes>

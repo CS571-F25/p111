@@ -15,12 +15,12 @@ const DriverBar = ({ name, driverNum, totalPoints, color, maxPoints }) => {
     return (
         <div style={{ marginBottom: 10 }}>
             <div style={{ marginBottom: 4, color: "white", fontWeight: "bold" }}>
-                {name} - <span style={{ color }}>{driverNum}</span>{' '} pts
+                {name} - <span style={{ color }}>{driverNum}</span>{' '}
             </div>
 
             <div style={{ display: "flex", alignItems: "center" }}>
-                <span style={{ color, marginRight: 8, minWidth: 30, textAlign: "right" }}>
-                    {totalPoints}
+                <span style={{ color, marginRight: 8, minWidth: 100, textAlign: "right" }}>
+                    {totalPoints} pts
                 </span>
                 <div
                     style={{

@@ -53,8 +53,8 @@ export default function NavBar() {
                             navbarScroll
                         >
                             <Nav.Link as={Link} to="/" style={{ color: "white", fontFamily: "'Orbitron', sans-serif" }}>Home</Nav.Link>
-                            <Nav.Link as={Link} to="/scoringBuilder" style={{ color: "white", fontFamily: "'Orbitron', sans-serif" }}>Scoring Builder</Nav.Link>
-                            <Nav.Link as={Link} to="/addDriver" style={{ color: "white", fontFamily: "'Orbitron', sans-serif" }}>Add Drivers</Nav.Link>
+                            <Nav.Link as={Link} to="/scoringBuilder" style={{ color: "white", fontFamily: "'Orbitron', sans-serif" }}> Custom Scoring Builder</Nav.Link>
+                            <Nav.Link as={Link} to="/addDriver" style={{ color: "white", fontFamily: "'Orbitron', sans-serif" }}>Add Driver</Nav.Link>
                         </Nav>
                     </Navbar.Collapse>
                 </Navbar>

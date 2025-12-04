@@ -19,6 +19,7 @@ function App() {
   const [year, setYear] = useState("2025");
   const [system, setSystem] = useState("F1");
   const [customSystem, setCustomSystem] = useState([25, 18, 15, 12, 10, 8, 6, 4, 2, 1,0,0,0,0,0,0,0,0,0,0]);
+  const [customDrivers, setCustomDrivers] = useState(new Map());
 
 
   return (
@@ -30,7 +31,8 @@ function App() {
       isLoading, setIsLoading,
       year, setYear,
       system, setSystem,
-      customSystem, setCustomSystem
+      customSystem, setCustomSystem,
+      customDrivers, setCustomDrivers
     }}>
       <HashRouter>
         <Routes>

@@ -15,7 +15,8 @@ const DriverBarGroup = () => {
         isLoading,
         year, setYear,
         system, setSystem,
-        customSystem, setCustomSystem
+        customSystem, setCustomSystem,
+        customDrivers
     } = useContext(MyContext);
 
     async function fetchResults() {
@@ -145,13 +146,13 @@ const DriverBarGroup = () => {
 
     let scores = [];
     if(system === "F1"){
-        scores = calculateStandardScores(drivers, [25, 18, 15, 12, 10, 8, 6, 4, 2, 1]);
+        scores = calculateStandardScores(drivers, [25, 18, 15, 12, 10, 8, 6, 4, 2, 1], customDrivers);
     }else if(system === "Nascar"){
-         scores = calculateStandardScores(drivers, [40,35,34,33,32,31,29,28,27,26,25,24,23,22,21,20,19,18,17,16,15,14,13,12,11,10,9,8,7,6,5,4,3,2,1,1,1,1,1]);
+         scores = calculateStandardScores(drivers, [40,35,34,33,32,31,29,28,27,26,25,24,23,22,21,20,19,18,17,16,15,14,13,12,11,10,9,8,7,6,5,4,3,2,1,1,1,1,1], customDrivers);
     }else if(system === "MarioKart"){
-         scores = calculateStandardScores(drivers, [15, 12, 10, 9, 9, 8, 8, 7, 7, 6, 6, 5, 5, 5, 4, 4, 4, 3, 3, 3, 2, 2, 1]);
+         scores = calculateStandardScores(drivers, [15, 12, 10, 9, 9, 8, 8, 7, 7, 6, 6, 5, 5, 5, 4, 4, 4, 3, 3, 3, 2, 2, 1], customDrivers);
     }else if(system === "Custom"){
-         scores = calculateStandardScores(drivers, customSystem);
+         scores = calculateStandardScores(drivers, customSystem, customDrivers);
     }
     const maxPoints = Math.max(...scores.values());
     return (

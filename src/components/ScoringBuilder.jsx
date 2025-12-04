@@ -13,6 +13,10 @@ export default function ScoringBuilder() {
         customSystem, setCustomSystem
     } = useContext(MyContext);
 
+    useEffect(() => {
+        setIsLoading(false);
+    }, []);
+
     const handleChange = (index, newValue) => {
         const updated = [...customSystem];
         updated[index] = parseInt(newValue);
@@ -21,9 +25,9 @@ export default function ScoringBuilder() {
 
     return (
         <div style={{ padding: 20, color: "white" }}>
-            <NavBar/>
-            <h1 style={{padding: 20}}>Enter Points per Position</h1>
-            <h2 style={{padding: 20}}>Select "Custom Score" in Home to view your system</h2>
+            <NavBar />
+            <h1 style={{ padding: 20 }}>Enter Points per Position</h1>
+            <h2 style={{ padding: 20 }}>Select "Custom Score" in Home to view your system</h2>
 
             <Form>
                 <Row className="g-3">

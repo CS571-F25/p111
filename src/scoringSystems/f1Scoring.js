@@ -1,6 +1,4 @@
-export function calculateStandardScores(driverMap, pointMap) {
-    //const pointsForPosition = [25, 18, 15, 12, 10, 8, 6, 4, 2, 1];
-    console.log(pointMap);
+export function calculateStandardScores(driverMap, pointMap, customDrivers) {
     const pointsForPositionSprint = [8, 7, 6, 5, 4, 3, 2, 1];
     const scores = new Map();
 
@@ -9,6 +7,7 @@ export function calculateStandardScores(driverMap, pointMap) {
 
         positions.forEach(pos => {
             if (pos == null) return;
+
             const isSprint = typeof pos === "string" && pos.endsWith("s");
             const position = parseInt(pos);
 
@@ -25,6 +24,12 @@ export function calculateStandardScores(driverMap, pointMap) {
 
         scores.set(driverNum, total);
     });
+
+    if (customDrivers) {
+        customDrivers.forEach((points, driverName) => {
+            scores.set(driverName, points)
+        });
+    }
 
     return scores;
 }

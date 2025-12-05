@@ -6,6 +6,7 @@ import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
 import MyContext from "./contexts/MyContext";
 import { Link } from "react-router-dom";
+import OpenF1Button from "./OpenF1Button";
 
 export default function NavBar() {
 
@@ -36,10 +37,10 @@ export default function NavBar() {
                 >
                     <Navbar.Brand href="#">
                         <img
-                            src="src\assets\F1-Logo.png"
+                            src="https://logodownload.org/wp-content/uploads/2016/11/formula-1-logo-5-3.png"
                             alt="Racing What Ifs"
                             style={{
-                                height: "40px",
+                                height: "35px",
                                 width: "auto",
                                 display: "block",
                             }}
@@ -56,6 +57,7 @@ export default function NavBar() {
                             <Nav.Link as={Link} to="/scoringBuilder" style={{ color: "white", fontFamily: "'Orbitron', sans-serif" }}> Custom Scoring Builder</Nav.Link>
                             <Nav.Link as={Link} to="/addDriver" style={{ color: "white", fontFamily: "'Orbitron', sans-serif" }}>Add Driver</Nav.Link>
                         </Nav>
+                        <OpenF1Button onClick={() => window.open("https://www.openf1.org", "_blank")} />
                     </Navbar.Collapse>
                 </Navbar>
 

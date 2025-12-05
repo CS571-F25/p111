@@ -1,6 +1,8 @@
 import NavBar from './NavBar'
 import React, { useEffect, useState, useContext } from 'react';
 import MyContext from "./contexts/MyContext";
+import { Form, Button, Row, Col, Container } from "react-bootstrap";
+import Footer from "./Footer";
 
 export default function AddDriver() {
     const {
@@ -20,13 +22,10 @@ export default function AddDriver() {
 
         const pts = Number(points);
 
-        // Clone the Map, add new entry
         const updated = new Map(customDrivers);
         updated.set(name, pts);
 
         setCustomDrivers(updated);
-
-        // Clear inputs
         setName("");
         setPoints("");
     };
@@ -34,29 +33,40 @@ export default function AddDriver() {
     return (
         <div style={{ marginTop: "100px", textAlign: "center" }}>
             <NavBar />
-            <div style={{ color: "white" }}>Add Driver</div>
-            <div style={{ color: "white" }}>Add a custom driver and point total</div>
-
-            <div style={{ marginTop: "20px" }}>
-                <input
-                    style={{ padding: "6px", marginRight: "8px" }}
-                    placeholder="Driver name"
-                    value={name}
-                    onChange={(e) => setName(e.target.value)}
-                />
-
-                <input
-                    type="number"
-                    style={{ padding: "6px", marginRight: "8px" }}
-                    placeholder="Points"
-                    value={points}
-                    onChange={(e) => setPoints(e.target.value)}
-                />
-
-                <button onClick={handleAddDriver}>
-                    Add Driver
-                </button>
+            
+            <div style={{ color: "white", fontSize: "1.4rem", marginTop: "20px" }}>
+                Add Driver
             </div>
+            <div style={{ color: "white", marginBottom: "20px" }}>
+                Add a custom driver and point total
+            </div>
+
+            <Container style={{ maxWidth: "400px" }}>
+                <Form>
+                    <Form.Group className="mb-3">
+                        <Form.Control
+                            type="text"
+                            placeholder="Driver name"
+                            value={name}
+                            onChange={(e) => setName(e.target.value)}
+                        />
+                    </Form.Group>
+
+                    <Form.Group className="mb-3">
+                        <Form.Control
+                            type="number"
+                            placeholder="Points"
+                            value={points}
+                            onChange={(e) => setPoints(e.target.value)}
+                        />
+                    </Form.Group>
+
+                    <Button variant="primary" className="w-100" onClick={handleAddDriver}>
+                        Add Driver
+                    </Button>
+                </Form>
+            </Container>
+            <Footer></Footer>
         </div>
     );
 }

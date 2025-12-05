@@ -2,6 +2,7 @@ import NavBar from './NavBar'
 import React, { useEffect, useState, useContext } from 'react';
 import { Form, Button, Row, Col } from "react-bootstrap";
 import MyContext from "./contexts/MyContext";
+import Footer from "./Footer";
 
 export default function ScoringBuilder() {
     const {
@@ -26,8 +27,13 @@ export default function ScoringBuilder() {
     return (
         <div style={{ padding: 20, color: "white" }}>
             <NavBar />
-            <h1 style={{ padding: 20 }}>Enter Points per Position</h1>
-            <h2 style={{ padding: 20 }}>Select "Custom Score" in Home to view your system</h2>
+
+            <div style={{ color: "white", fontSize: "1.4rem", marginTop: "20px" }}>
+                Custom Scoring Builder
+            </div>
+            <div style={{ color: "white", marginBottom: "20px" }}>
+                Select "Custom Score" in Home to view your system
+            </div>
 
             <Form>
                 <Row className="g-3">
@@ -45,6 +51,7 @@ export default function ScoringBuilder() {
                 </Row>
 
             </Form>
+            <Footer></Footer>
         </div>
     );
 }

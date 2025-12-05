@@ -1,12 +1,14 @@
 import NavBar from './NavBar'
 import React, { useState } from 'react'
 import DriverBarGroup from './DriverBarGroup'
+import Footer from "./Footer";
 
 export default function Home() {
     return (
         <div style={{ marginTop: "100px", textAlign: "center" }}>
             <NavBar/>
             <DriverBarGroup />
+            <Footer></Footer>
         </div>
     );
 }

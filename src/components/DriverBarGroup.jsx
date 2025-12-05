@@ -3,6 +3,9 @@ import React, { useEffect, useState, useContext } from 'react';
 import { calculateStandardScores } from "../scoringSystems/f1Scoring";
 import MyContext from "./contexts/MyContext";
 import DriverBar from './DriverBar';
+import YearDropdown from './YearDropdown';
+import SystemDropdown from './SystemDropdown';
+import LoadingSpinner from './LoadingSpinner';
 import Dropdown from 'react-bootstrap/Dropdown';
 
 const DriverBarGroup = () => {
@@ -142,17 +145,32 @@ const DriverBarGroup = () => {
     }, [results]);
 
 
+    let scores = [];
+    useEffect(() => {
+
+        if (system === "F1") {
+            scores = calculateStandardScores(drivers, [25, 18, 15, 12, 10, 8, 6, 4, 2, 1], customDrivers);
+        } else if (system === "Nascar") {
+            scores = calculateStandardScores(drivers, [40, 35, 34, 33, 32, 31, 29, 28, 27, 26, 25, 24, 23, 22, 21, 20, 19, 18, 17, 16, 15, 14, 13, 12, 11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1, 1, 1, 1, 1], customDrivers);
+        } else if (system === "MarioKart") {
+            scores = calculateStandardScores(drivers, [15, 12, 10, 9, 9, 8, 8, 7, 7, 6, 6, 5, 5, 5, 4, 4, 4, 3, 3, 3, 2, 2, 1], customDrivers);
+        } else if (system === "Custom") {
+            scores = calculateStandardScores(drivers, customSystem, customDrivers);
+        }
+    }, [drivers]);
+
+
     if (error) return <div>Error: {error}</div>;
 
-    let scores = [];
-    if(system === "F1"){
+
+    if (system === "F1") {
         scores = calculateStandardScores(drivers, [25, 18, 15, 12, 10, 8, 6, 4, 2, 1], customDrivers);
-    }else if(system === "Nascar"){
-         scores = calculateStandardScores(drivers, [40,35,34,33,32,31,29,28,27,26,25,24,23,22,21,20,19,18,17,16,15,14,13,12,11,10,9,8,7,6,5,4,3,2,1,1,1,1,1], customDrivers);
-    }else if(system === "MarioKart"){
-         scores = calculateStandardScores(drivers, [15, 12, 10, 9, 9, 8, 8, 7, 7, 6, 6, 5, 5, 5, 4, 4, 4, 3, 3, 3, 2, 2, 1], customDrivers);
-    }else if(system === "Custom"){
-         scores = calculateStandardScores(drivers, customSystem, customDrivers);
+    } else if (system === "Nascar") {
+        scores = calculateStandardScores(drivers, [40, 35, 34, 33, 32, 31, 29, 28, 27, 26, 25, 24, 23, 22, 21, 20, 19, 18, 17, 16, 15, 14, 13, 12, 11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1, 1, 1, 1, 1], customDrivers);
+    } else if (system === "MarioKart") {
+        scores = calculateStandardScores(drivers, [15, 12, 10, 9, 9, 8, 8, 7, 7, 6, 6, 5, 5, 5, 4, 4, 4, 3, 3, 3, 2, 2, 1], customDrivers);
+    } else if (system === "Custom") {
+        scores = calculateStandardScores(drivers, customSystem, customDrivers);
     }
     const maxPoints = Math.max(...scores.values());
     return (
@@ -165,31 +183,13 @@ const DriverBarGroup = () => {
                 gap: "1rem"
             }}>
                 <div>Year</div>
-                <Dropdown>
-                    <Dropdown.Toggle variant="success">
-                        {year}
-                    </Dropdown.Toggle>
-                    <Dropdown.Menu>
-                        <Dropdown.Item onClick={() => setYear(2025)}>2025</Dropdown.Item>
-                        <Dropdown.Item onClick={() => setYear(2024)}>2024</Dropdown.Item>
-                        <Dropdown.Item onClick={() => setYear(2023)}>2023</Dropdown.Item>
-                    </Dropdown.Menu>
-                </Dropdown>
+                <YearDropdown />
+
                 <div>Scoring System</div>
-                <Dropdown>
-                    <Dropdown.Toggle variant="success">
-                        {system}
-                    </Dropdown.Toggle>
-                    <Dropdown.Menu>
-                        <Dropdown.Item onClick={() => setSystem("F1")}>F1 (No fastest lap point)</Dropdown.Item>
-                        <Dropdown.Item onClick={() => setSystem("Nascar")}>Nascar</Dropdown.Item>
-                        <Dropdown.Item onClick={() => setSystem("MarioKart")}>Mario Kart</Dropdown.Item>
-                        <Dropdown.Item onClick={() => setSystem("Custom")}>Custom System</Dropdown.Item>
-                    </Dropdown.Menu>
-                </Dropdown>
+                <SystemDropdown />
             </div>
 
-            {!isLoading ? <div style={{ padding: 20 }} >Driver Standings ({year})</div> : <div style={{ padding: 20 }}>Results Loading...</div>}
+            {!isLoading ? <div style={{ padding: 20 }} > F1 Driver Standings ({year})</div> : <LoadingSpinner />}
 
             {[...scores.entries()]
                 .sort((a, b) => b[1] - a[1])
@@ -200,7 +200,7 @@ const DriverBarGroup = () => {
                     return (
                         <DriverBar
                             key={driverNum}
-                            name={info?.name || `Driver ${driverNum}`}
+                            name={info?.name || `${driverNum}`}
                             driverNum={driverNum}
                             totalPoints={totalPoints}
                             color={color}

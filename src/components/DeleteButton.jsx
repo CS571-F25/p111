@@ -2,14 +2,15 @@ import { useContext } from "react";
 import Button from "react-bootstrap/Button";
 import MyContext from "./contexts/MyContext";
 
-const DeleteButton = ({ name }) => {
+const DeleteButton = ({ name, number }) => {
     const { setDrivers } = useContext(MyContext);
     const { setCustomDrivers } = useContext(MyContext);
 
     const deleteDriver = () => {
         setDrivers(prev => {
+            console.log(name);
             const newMap = new Map(prev);
-            newMap.delete(name);
+            newMap.delete(number);
             return newMap;
         });
 

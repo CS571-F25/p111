@@ -13,42 +13,42 @@ const DriverBar = ({ name, driverNum, totalPoints, color, maxPoints }) => {
         return () => clearTimeout(timeout);
     }, [widthPercent]);
 
-return (
-    <div style={{ marginBottom: 10 }}>
-        <div style={{ marginBottom: 4, color: "white", fontWeight: "bold" }}>
-            {name} - <span style={{ color }}>{driverNum}</span>{" "}
+    return (
+        <div style={{ marginBottom: 10 }}>
+            <div style={{ marginBottom: 4, color: "white", fontWeight: "bold" }}>
+                {name} - <span style={{ color }}>{driverNum}</span>{" "}
+            </div>
+
+            <div style={{ display: "flex", alignItems: "center" }}>
+                <span
+                    style={{
+                        color,
+                        marginRight: 8,
+                        minWidth: 100,
+                        textAlign: "right",
+                    }}
+                >
+                    {totalPoints} pts
+                </span>
+                <div style={{ paddingLeft: 5, paddingRight: 10 }}>
+                    <DeleteButton name={name} number={driverNum} />
+                </div>
+
+                {/* Bar grows to fill space */}
+                <div
+                    style={{
+                        height: "24px",
+                        width: `${width}%`,
+                        backgroundColor: color,
+                        borderRadius: 3,
+                        transition: "width 1s ease-out",
+                        marginRight: 10,
+                    }}
+                />
+
+            </div>
         </div>
-
-        <div style={{ display: "flex", alignItems: "center" }}>
-            <span
-                style={{
-                    color,
-                    marginRight: 8,
-                    minWidth: 100,
-                    textAlign: "right",
-                }}
-            >
-                {totalPoints} pts
-            </span>
-
-            {/* Bar grows to fill space */}
-            <div
-                style={{
-                    height: "24px",
-                    width: `${width}%`,
-                    backgroundColor: color,
-                    borderRadius: 3,
-                    transition: "width 1s ease-out",
-                    flexGrow: 1,
-                    marginRight: 10,
-                }}
-            />
-
-            {/* Delete button at far right */}
-            <DeleteButton name={name}/>
-        </div>
-    </div>
-);
+    );
 
 
 };

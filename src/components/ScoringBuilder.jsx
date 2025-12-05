@@ -18,10 +18,14 @@ export default function ScoringBuilder() {
         setIsLoading(false);
     }, []);
 
-    const handleChange = (index, newValue) => {
-        const updated = [...customSystem];
-        updated[index] = parseInt(newValue);
-        setCustomSystem(updated);
+    const handleChange = (index, value) => {
+        const safeValue = value === "" ? 0 : Number(value);
+
+        setCustomSystem(prev => {
+            const updated = [...prev];
+            updated[index] = safeValue;
+            return updated;
+        });
     };
 
     return (
